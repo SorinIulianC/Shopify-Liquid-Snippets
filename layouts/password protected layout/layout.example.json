@@ -1,0 +1,13 @@
+{
+  "layout": "password_layout",
+  "sections": {
+    "main": {
+      "type": "example",
+      "settings": {
+      }
+    }
+  },
+  "order": [
+    "main"
+  ]
+}
