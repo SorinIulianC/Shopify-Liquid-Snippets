@@ -1,0 +1,31 @@
+{% liquid
+  comment
+    let's assume the url path is store/pages/selected_collection
+    and based on the query parameter we are sending we want to hide a specific product
+    the path then becomes store/pages/selected_collection/$hide_product=specific_product_id
+    i use $hide_product as the query param (i use $ because it's easier to find in the path string)
+  endcomment
+  if request.path contains '$hide_product='
+    assign collection_url = request.path | split: '$hide_product=' | first
+    comment
+      this will output store/pages/selected_collection/
+    endcomment
+    assign collection_url = request.path | split: '/' | last
+    comment
+      this will output selected_collection which in our case is a collection handle named "selected_collection"
+    endcomment
+    assign product_slug = request.path | split: '$hide_product=' | last
+    comment
+      this will output the handle for the product we want to hide which in our case is a handle named "specific_product_id"
+    endcomment
+    assign collection = collections[collection_url]
+    for product in collection.products
+      unless product.handle == product_slug
+
+        comment
+          do stuff
+        endcomment
+      endunless
+    endfor
+  endif
+%}

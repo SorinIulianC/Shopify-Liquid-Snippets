@@ -1,3 +1,3 @@
 # Shopify-Liquid-Snippets
 
-Collection of shopify liquids snippets
+Collection of shopify liquids snippets and tricks.
