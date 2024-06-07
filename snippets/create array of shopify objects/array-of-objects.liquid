@@ -1,0 +1,36 @@
+{% liquid
+    comment
+      lets assume we have a list of shopify objects that we want to append to a list based on a filter
+    endcomment
+    assign example_products = collection.products
+
+    assign filter = 'test'
+    comment
+      first we initiate an empty array
+    endcomment
+    assign empty_array = '' | split: ','
+    assign output_array = empty_array
+    comment
+      now we fiter our products
+    endcomment
+    for product in example_products
+        comment
+          just a random filter
+        endcomment
+        if product.title contains filter
+            comment
+              this will result in [productObjectDrop]
+            endcomment
+            assign product_as_array = product | concat: empty_array
+            comment
+              now we add it to the array
+            endcomment
+            assign output_array = output_array | concat: product_as_array
+        endif
+    endfor
+
+    comment
+      output will be filtered list of objects
+    endcomment
+    echo output_array
+%}
