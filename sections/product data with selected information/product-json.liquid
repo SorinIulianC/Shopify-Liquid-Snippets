@@ -1,0 +1,29 @@
+{% layout 'none' %}
+{% comment %} we remove the layout so we only fetch the wanted data {% endcomment %}
+{% liquid
+    assign selected_product = product
+%}
+{% comment %}by fetching this section you can parse the required data. you can add / remove whatever extra you need.{% endcomment %}
+<script type="application/json">
+    {
+        "id": {{ selected_product.id }},
+        "title": {{ selected_product.title }},
+        "body_html": {{ selected_product.body_html }},
+        "vendor": {{ selected_product.vendor }},
+        "product_type": {{ selected_product.product_type }},
+        "created_at": {{ selected_product.created_at }},
+        "handle": {{ selected_product.handle }},
+        "updated_at": {{ selected_product.updated_at }},
+        "published_at": {{ selected_product.published_at }},
+        "template_suffix": {{ selected_product.template_suffix }},
+        "published_scope": {{ selected_product.published_scope }},
+        "tags": {{ selected_product.published_scope }},
+        "variants": {% for variant in selected_product.variants %} {% comment %} here you can get the variants data you want {%endcomment%} {% endfor %}
+        "options": {{ selected_product.options }},
+        "images": {{ selected_product.images }},
+        "image": {{ selected_product.image }},
+        "metafields": {
+            "[name_space][key]": "{{ selected_product[name_space][key] }}"
+        }
+    }
+</script>
