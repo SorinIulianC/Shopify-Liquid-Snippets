@@ -1,0 +1,14 @@
+{%- liquid
+  capture css_content
+    comment
+      content for css / liquid css that we want to minify
+    endcomment
+  endcapture
+  assign content = content | strip_newlines | split: ' ' | join: ' ' | split: '*/'
+  new_content = ""
+  for word in content
+    assign new_word = word | split: '/*' | first | strip | replace: '; ', ';' | replace: '} ', '}' | replace: '{ ', '{' | replace: ' {', '{'
+    assign new_content = new_content | append: new_word
+  endfor
+  echo new_content
+-%}
